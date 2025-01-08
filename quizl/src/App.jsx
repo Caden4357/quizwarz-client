@@ -3,7 +3,7 @@ import './App.css'
 import Homepage from './components/Homepage/Homepage'
 import Nav from './components/Nav'
 import { Route, Routes } from 'react-router-dom'
-import Category from './components/categories/Category'
+import Category from './components/Categories/Category'
 import Quiz from './components/Homepage/Quiz'
 // ! Immediate fixes
 // ! Timer is not working properly it needs to reset when the next question is loaded currently it just keeps counting down
