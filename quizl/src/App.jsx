@@ -5,7 +5,6 @@ import Nav from './components/Nav'
 import { Route, Routes } from 'react-router-dom'
 import Category from './components/categories/Category'
 import Quiz from './components/Homepage/Quiz'
-import { UserProvider } from './context/UserContext'
 // ! Immediate fixes
 // ! Timer is not working properly it needs to reset when the next question is loaded currently it just keeps counting down
 // ? Add a feature to choose a category ✔️
@@ -23,16 +22,14 @@ import { UserProvider } from './context/UserContext'
 function App() {
   return (
     <div>
-      <UserProvider>
-        <QuizProvider>
-          <Nav />
-          <Routes>
-            <Route path='/' element={<Homepage />} />
-            <Route path='/quiz' element={<Quiz />} />
-            <Route path='/categories' element={<Category />} />
-          </Routes>
-        </QuizProvider>
-      </UserProvider>
+      <QuizProvider>
+        <Nav />
+        <Routes>
+          <Route path='/' element={<Homepage />} />
+          <Route path='/quiz' element={<Quiz />} />
+          <Route path='/categories' element={<Category />} />
+        </Routes>
+      </QuizProvider>
     </div>
   )
 }
