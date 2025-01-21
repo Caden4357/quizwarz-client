@@ -12,6 +12,7 @@ const initialState = {
 
 const reducer = (state, action) => {    
     switch(action.type) {
+        // create one case to set a whole new game 
         case 'SET_CATEGORY':
             console.log('SET_CATEGORY', action.payload);
             return {
