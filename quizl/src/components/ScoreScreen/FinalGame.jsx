@@ -1,11 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { QuizContext } from '../../context/QuizContext';
+import axios from 'axios';
+import { UserContext } from '../../context/UserContext';
 const FinalGame = ({ finalGame }) => {
+    const { user, setUser } = useContext(UserContext)
     const navigate = useNavigate()
     const { gameReducer, dispatch } = useContext(QuizContext)
 
-    const resetGame = () => {
+    const resetGame = async () => {
         dispatch({ type: 'RESET_GAME' })
         navigate('/')
     }

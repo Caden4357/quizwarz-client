@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { QuizContext } from '../../context/QuizContext';
 import { motion } from 'framer-motion'
 import startQuiz from '../../functions/Quiz';
 import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios';
 const Homepage = (props) => {
     const navigate = useNavigate()
     // const {currentGame, setCurrentGame} = useContext(QuizContext)
     const {gameReducer, dispatch} = useContext(QuizContext)
-
 
     const beginQuiz = async (e) => {
         const game = await startQuiz()

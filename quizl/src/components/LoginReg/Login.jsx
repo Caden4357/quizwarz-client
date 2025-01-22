@@ -14,8 +14,7 @@ const Login = (props) => {
         e.preventDefault()
         axios.post('https://quizwarz-server.onrender.com/api/login', {email, password}, {withCredentials: true})
             .then(res => {
-                console.log(res.data)
-                setUser({...user, name: res.data.name, email: res.data.email, loggedIn: true})
+                setUser({ id:res.data.id, name: res.data.name, email: res.data.email, loggedIn: true })
                 navigate('/')
             })
             .catch(err => {

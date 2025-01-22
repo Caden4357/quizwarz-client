@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import {motion} from 'framer-motion';
+import React, { useState, useContext } from 'react';
+import { motion } from 'framer-motion';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { UserContext } from '../../context/UserContext';
 const Reg = (props) => {
+    const { user, setUser } = useContext(UserContext)
+
     const navigate = useNavigate()
     const [name, setname] = useState('')
     const [email, setEmail] = useState('')
@@ -15,7 +17,7 @@ const Reg = (props) => {
         e.preventDefault()
         axios.post('https://quizwarz-server.onrender.com/api/register', { name, email, password, confirmPassword }, { withCredentials: true })
             .then(res => {
-                console.log(res.data)
+                setUser({ id:res.data.id, name: res.data.name, email: res.data.email, loggedIn: true })
                 navigate('/')
             })
             .catch(err => {
@@ -31,9 +33,9 @@ const Reg = (props) => {
     return (
         <motion.div
             className='flex flex-col justify-center items-center'
-            initial={{opacity: 0, y: -100}}
-            animate={{opacity: 1, y: 0}}
-            transition={{duration: 2, ease: 'easeIn', type: 'spring', stiffness: 100, bounce: 0.5}}
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 2, ease: 'easeIn', type: 'spring', stiffness: 100, bounce: 0.5 }}
         >
             <h2 className='text-4xl my-8'>Register</h2>
 

@@ -9,6 +9,7 @@ import Quiz from './components/Homepage/Quiz'
 import Login from './components/LoginReg/Login'
 import Reg from './components/LoginReg/Reg'
 import Leaderboard from './components/Leaderboard/Leaderboard'
+import Profile from './components/Profile/Profile'
 // ! Immediate fixes
 // ! Timer is not working properly it needs to reset when the next question is loaded currently it just keeps counting down
 // ? Add a feature to choose a category ✔️
@@ -36,6 +37,7 @@ function App() {
             <Route path='/leaderboard' element={<Leaderboard/>} />
             <Route path='/quiz' element={<Quiz />} />
             <Route path='/categories' element={<Category />} />
+          <Route path='/profile' element={<Profile/>} />
           </Routes>
         </QuizProvider>
       </UserProvider>

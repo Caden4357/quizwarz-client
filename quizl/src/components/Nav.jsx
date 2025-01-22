@@ -18,12 +18,14 @@ const Nav = ({ beginQuiz }) => {
             <div className='flex justify-between items-center'>
                 <Link to={'/leaderboard'} className='text-xl underline w-1/4'>Leaderboard</Link>
                 {
-                    user.loggedIn ? <h1 className='text-4xl w-2/4'>Welcome Back {user.name}</h1> : ''
+                    user.loggedIn ? <h1 className='text-4xl w-2/4'>Welcome {user.name}</h1> : ''
                 }
                 {
                     user.loggedIn ? <button onClick={logout} className='text-xl underline w-1/4'>Logout</button> : <Link to={'/login'} className='text-xl underline w-1/4'>Login</Link>
                 }
-                
+                {
+                    user.loggedIn && <Link to={'/profile'} className='text-xl underline w-1/4'>Profile</Link>
+                }
             </div>
             <Link to={'/'}><h1 className='text-8xl underline mb-4 text-purple-600'>QuizGameZ</h1></Link>
             

@@ -6,8 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import Countdown from 'react-countdown';
 import './Question.css'
 import FinalGame from './ScoreScreen/FinalGame';
+import { UserContext } from '../context/UserContext';
+
 let choices = ['A', 'B', 'C', 'D']
 const Question = ({ time }) => {
+    const { user, setUser } = useContext(UserContext)
     const { gameReducer, dispatch } = useContext(QuizContext)
     const [selectedAnswer, setSelectedAnswer] = useState('')
     const [submitted, setSubmitted] = useState(false)
@@ -46,11 +49,19 @@ const Question = ({ time }) => {
         const finalGame = {
             category: gameReducer.category,
             score: updatedScore, // Use the updated score.
-            numberOfQuestions: gameReducer.questions.length
+            numberOfQuestions: gameReducer.questions.length,
+            user: user.id
         };
         setFinalGame(finalGame)
         // dispatch({type: 'RESET_GAME'})
         console.log('FINAL GAME', finalGame);
+        try{
+            const res = await axios.post('https://quizwarz-server.onrender.com/api/post/quiz', finalGame, { withCredentials: true })
+            console.log(res);
+        }
+        catch(err){
+            console.log(err);
+        }
     };
 
     // ! BUG
