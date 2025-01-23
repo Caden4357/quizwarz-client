@@ -7,7 +7,7 @@ const Profile = (props) => {
     const navigate = useNavigate()
     const [quizzes, setQuizzes] = useState([])
     useEffect(() => {
-        axios.get('http://localhost:8000/api/get/quizzes/' + user.id)
+        axios.get('https://quizwarz-server.onrender.com/api/get/quizzes/' + user.id)
             .then(res => {
                 console.log(res.data);
                 setQuizzes(res.data)
