@@ -55,12 +55,14 @@ const Question = ({ time }) => {
         setFinalGame(finalGame)
         // dispatch({type: 'RESET_GAME'})
         console.log('FINAL GAME', finalGame);
-        try{
-            const res = await axios.post('https://quizwarz-server.onrender.com/api/post/quiz', finalGame)
-            console.log(res);
+        try {
+            if (user.id) {
+                const res = await axios.post('https://quizwarz-server.onrender.com/api/post/quiz', finalGame)
+                console.log(res);
+            }
         }
-        catch(err){
-            console.log('ERROR: ',err);
+        catch (err) {
+            console.log('ERROR: ', err);
         }
     };
 
