@@ -56,11 +56,11 @@ const Question = ({ time }) => {
         // dispatch({type: 'RESET_GAME'})
         console.log('FINAL GAME', finalGame);
         try{
-            const res = await axios.post('https://quizwarz-server.onrender.com/api/post/quiz', finalGame, { withCredentials: true })
+            const res = await axios.post('http://localhost:8000/api/post/quiz', finalGame)
             console.log(res);
         }
         catch(err){
-            console.log(err);
+            console.log('ERROR: ',err);
         }
     };
 

@@ -15,9 +15,9 @@ const Reg = (props) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        axios.post('https://quizwarz-server.onrender.com/api/register', { name, email, password, confirmPassword }, { withCredentials: true })
+        axios.post('https://quizwarz-server.onrender.com/api/register', { name, email, password, confirmPassword })
             .then(res => {
-                setUser({ id:res.data.id, name: res.data.name, email: res.data.email, loggedIn: true })
+                setUser({ id:res.data._id, name: res.data.name, email: res.data.email, loggedIn: true })
                 navigate('/')
             })
             .catch(err => {

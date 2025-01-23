@@ -1,12 +1,13 @@
-import React, {useState, useContext, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { UserContext } from '../../context/UserContext';
 const Profile = (props) => {
     const { user, setUser } = useContext(UserContext)
+    const navigate = useNavigate()
     const [quizzes, setQuizzes] = useState([])
     useEffect(() => {
-        axios.get('https://quizwarz-server.onrender.com/api/get/quizzes', {withCredentials: true})
+        axios.get('http://localhost:8000/api/get/quizzes/' + user.id)
             .then(res => {
                 console.log(res.data);
                 setQuizzes(res.data)
@@ -14,13 +15,22 @@ const Profile = (props) => {
             })
             .catch(err => console.log(err))
     }, [])
+    const logout = () => {
+        axios.post('https://quizwarz-server.onrender.com/api/logout')
+            .then(res => {
+                setUser({name:'', email:'', loggedIn: false})
+                navigate('/')
+            })
+            .catch(err => console.log(err))
+    }
     return (
         <div>
-            <h1 className='text-4xl'>Profile</h1>
-            <h2 className='text-2xl'>Name: {user.name}</h2>
+            <hr />
+            <button onClick={logout} className='text-xl underline w-1/4'>Logout</button>
+            <h1 className='text-4xl'>{user.name}'s Profile</h1>
             <h2 className='text-2xl'>Email: {user.email}</h2>
             <h2 className='text-2xl'>Quizzes Taken: {quizzes.length}</h2>
-            <h2>Quiz Results:</h2>
+            <h2 className='text-2xl'>Quiz Results:</h2>
             {
                 quizzes.map((quiz, idx) => {
                     return (
@@ -32,6 +42,7 @@ const Profile = (props) => {
                 })
             }
         </div>
-)}
+    )
+}
 
 export default Profile;

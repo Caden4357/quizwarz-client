@@ -6,13 +6,6 @@ import { motion } from 'framer-motion';
 const Nav = ({ beginQuiz }) => {
     const {user, setUser} = useContext(UserContext)
 
-    const logout = () => {
-        axios.post('https://quizwarz-server.onrender.com/api/logout',{}, {withCredentials: true})
-            .then(res => {
-                setUser({name:'', email:'', loggedIn: false})
-            })
-            .catch(err => console.log(err))
-    }
     return (
         <div>
             <div className='flex justify-between items-center'>
@@ -21,7 +14,7 @@ const Nav = ({ beginQuiz }) => {
                     user.loggedIn ? <h1 className='text-4xl w-2/4'>Welcome {user.name}</h1> : ''
                 }
                 {
-                    user.loggedIn ? <button onClick={logout} className='text-xl underline w-1/4'>Logout</button> : <Link to={'/login'} className='text-xl underline w-1/4'>Login</Link>
+                    !user.loggedIn && <Link to={'/login'} className='text-xl underline w-1/4'>Login</Link>
                 }
                 {
                     user.loggedIn && <Link to={'/profile'} className='text-xl underline w-1/4'>Profile</Link>
