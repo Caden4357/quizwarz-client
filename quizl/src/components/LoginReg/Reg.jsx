@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import { UserContext } from '../../context/UserContext';
+import { FidgetSpinner } from 'react-loader-spinner';
+
 const Reg = (props) => {
     const { user, setUser } = useContext(UserContext)
 
@@ -12,16 +14,22 @@ const Reg = (props) => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setconfirmPassword] = useState('')
     const [error, setError] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const submitHandler = (e) => {
         e.preventDefault()
+        setIsLoading(true)
         axios.post('https://quizwarz-server.onrender.com/api/register', { name, email, password, confirmPassword })
             .then(res => {
-                setUser({ id:res.data._id, name: res.data.name, email: res.data.email, loggedIn: true })
+                setUser({ id: res.data._id, name: res.data.name, email: res.data.email, loggedIn: true })
                 navigate('/')
+                setIsLoading(false)
+
             })
             .catch(err => {
                 console.log(err)
+                setIsLoading(false)
+
                 setError('Invalid Credentials')
             })
     }
@@ -38,7 +46,16 @@ const Reg = (props) => {
             transition={{ duration: 2, ease: 'easeIn', type: 'spring', stiffness: 100, bounce: 0.5 }}
         >
             <h2 className='text-4xl my-8'>Register</h2>
-
+            {
+                isLoading && <FidgetSpinner
+                    visible={true}
+                    height="80"
+                    width="80"
+                    ariaLabel="fidget-spinner-loading"
+                    wrapperStyle={{}}
+                    wrapperClass="fidget-spinner-wrapper"
+                />
+            }
 
             <form className='flex flex-col gap-4' onSubmit={submitHandler}>
                 {
